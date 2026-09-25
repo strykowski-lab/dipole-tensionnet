@@ -1,0 +1,22 @@
+#!/bin/bash
+# HPC-grade, optional: Optuna hyperparameter searches (03a_optuna_search1.py, 03b_optuna_search2.py).
+#   qsub -v SCRIPT=03a_optuna_search1.py pbs/optuna_search.pbs
+#   qsub -v SCRIPT=03b_optuna_search2.py pbs/optuna_search.pbs   (resubmit to add trials to the saved study)
+#PBS -l ngpus=4
+#PBS -l ncpus=48
+#PBS -l mem=65GB
+#PBS -l walltime=48:00:00
+#PBS -m be
+#PBS -M <your_email>
+#PBS -V
+#PBS -q gpuvolta
+set -e
+
+cd <path_to_repo>/
+source <path_to_repo>/.venv/bin/activate
+module load cuda/12.3.2
+module load cudnn/8.9.7-cuda12
+python ${SCRIPT} > .joblog_${SCRIPT%.py}.log 2>&1
+
+#qsub -I -l ngpus=1,ncpus=12,mem=20G,walltime=24:00:00 -q gpuvolta
+#qsub -I -l ngpus=4,ncpus=48,mem=65G,walltime=1:00:00 -q gpuvolta

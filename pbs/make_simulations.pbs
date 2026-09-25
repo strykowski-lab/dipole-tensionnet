@@ -1,0 +1,17 @@
+#!/bin/bash
+# HPC-grade: kinematic dipole simulations for one data set (01a_make_simulations.py).
+# Submit once per data set / role, in this order (see README):
+#   qsub -v DATASET=planck,ROLE=first pbs/make_simulations.pbs
+#   qsub -v DATASET=racs,ROLE=second  pbs/make_simulations.pbs   (etc.)
+#PBS -l ncpus=4
+#PBS -l mem=32GB
+#PBS -l walltime=48:00:00
+#PBS -m be
+#PBS -M <your_email>
+#PBS -V
+#PBS -q normal
+set -e
+
+cd <path_to_repo>/
+source <path_to_repo>/.venv/bin/activate
+python 01a_make_simulations.py --dataset ${DATASET} --role ${ROLE} > .joblog_make_simulations_${DATASET}_${ROLE}.log 2>&1

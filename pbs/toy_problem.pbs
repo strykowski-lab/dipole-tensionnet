@@ -1,0 +1,19 @@
+#!/bin/bash
+# HPC-grade (long): toy problem NREs (06b_toy_problem.py). Rerunning resumes from the saved per-NRE tensions.
+#   qsub pbs/toy_problem.pbs
+#PBS -l ngpus=1
+#PBS -l ncpus=12
+#PBS -l mem=32GB
+#PBS -l walltime=48:00:00
+#PBS -m be
+#PBS -M <your_email>
+#PBS -V
+#PBS -q gpuvolta
+set -e
+
+cd <path_to_repo>/
+source <path_to_repo>/.venv/bin/activate
+module load cuda/12.3.2
+module load cudnn/8.9.7-cuda12
+python 06a_toy_problem_seed_finder.py > .joblog_toy_problem_seed_finder.log 2>&1
+python 06b_toy_problem.py > .joblog_toy_problem.log 2>&1

@@ -1,0 +1,15 @@
+.venv
+venv
+__pycache__
+.claude
+.vscode
+.DS_Store
+*.log
+*.pbs.e*
+*.pbs.o*
+outputs/*
+!outputs/.placeholder
+data/*
+!data/.placeholder
+!data/observed_logR/
+!data/suspiciousness/

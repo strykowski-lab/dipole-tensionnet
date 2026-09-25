@@ -1,0 +1,24 @@
+#!/bin/bash
+# HPC-grade: train and evaluate the NREs of one data set combination (04_train_nre.py).
+#   qsub -v FIRST=planck,SECOND=racs pbs/train_nre.pbs
+# Resubmit the same job if it hits the walltime: training resumes from the last snapshot
+# and runs that are already trained are skipped.
+#PBS -l ngpus=4
+#PBS -l ncpus=48
+#PBS -l mem=85GB
+#PBS -l walltime=48:00:00
+#PBS -m be
+#PBS -M <your_email>
+#PBS -V
+#PBS -q gpuvolta
+#PBS -l jobfs=400GB
+set -e
+
+cd <path_to_repo>/
+source <path_to_repo>/.venv/bin/activate
+module load cuda/12.3.2
+module load cudnn/8.9.7-cuda12
+python 04_train_nre.py --first ${FIRST} --second ${SECOND} > .joblog_train_nre_${FIRST}_${SECOND}.log 2>&1
+
+#qsub -I -l ngpus=1,ncpus=12,mem=20G,walltime=24:00:00 -q gpuvolta
+#qsub -I -l ngpus=4,ncpus=48,mem=65G,walltime=1:00:00 -q gpuvolta

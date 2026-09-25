@@ -1,0 +1,23 @@
+#!/bin/bash
+# HPC-grade: log R of every nested-sampled pair (02b_validation_logR.py), then the
+# ground-truth distribution and T_NS (02c_validation_distribution.py).
+#   qsub pbs/validation_logR.pbs
+#PBS -l ncpus=18
+#PBS -l mem=192GB
+#PBS -l walltime=48:00:00
+#PBS -m be
+#PBS -M <your_email>
+#PBS -V
+#PBS -q normal
+#PBS -l jobfs=400GB
+set -e
+
+cd <path_to_repo>/
+source <path_to_repo>/.venv/bin/activate
+export OMP_NUM_THREADS=$PBS_NCPUS
+export OPENBLAS_NUM_THREADS=1
+export MKL_NUM_THREADS=1
+export NUMEXPR_NUM_THREADS=1
+export VECLIB_MAXIMUM_THREADS=1
+python 02b_validation_logR.py > .joblog_nested_sampling_logR.log 2>&1
+python 02c_validation_distribution.py > .joblog_nested_sampling_distribution.log 2>&1

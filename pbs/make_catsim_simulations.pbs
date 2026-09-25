@@ -1,0 +1,16 @@
+#!/bin/bash
+# HPC-grade: CatSIM simulations (01b_make_catsim_simulations.py), 10 jobs:
+#   for i in $(seq 0 9); do qsub -v SCRIPT_NUMBER=$i pbs/make_catsim_simulations.pbs; done
+# Uses a separate environment with catsim installed (catsim needs numpy >= 2, see README).
+#PBS -l ncpus=48
+#PBS -l mem=32GB
+#PBS -l walltime=24:00:00
+#PBS -m be
+#PBS -M <your_email>
+#PBS -V
+#PBS -q normal
+set -e
+
+cd <path_to_repo>/
+source <path_to_catsim_venv>/bin/activate
+python 01b_make_catsim_simulations.py > .joblog_make_catsim_simulations_${SCRIPT_NUMBER}.log 2>&1

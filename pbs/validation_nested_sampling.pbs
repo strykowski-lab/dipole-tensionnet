@@ -1,0 +1,16 @@
+#!/bin/bash
+# HPC-grade: nested sampling of 500 in concordance Planck-RACS pairs per job (02a_validation_nested_sampling.py), 20 jobs:
+#   for i in $(seq 0 19); do qsub -v SCRIPT_NUMBER=$i pbs/validation_nested_sampling.pbs; done
+#PBS -l ncpus=4
+#PBS -l mem=8GB
+#PBS -l walltime=48:00:00
+#PBS -m be
+#PBS -M <your_email>
+#PBS -V
+#PBS -q normal
+#PBS -l jobfs=32GB
+set -e
+
+cd <path_to_repo>/
+source <path_to_repo>/.venv/bin/activate
+python 02a_validation_nested_sampling.py > .joblog_nested_sampling_truth_${SCRIPT_NUMBER}.log 2>&1

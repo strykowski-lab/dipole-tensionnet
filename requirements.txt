@@ -1,0 +1,25 @@
+# Python 3.11 or 3.12. On a GPU node, install tensorflow[and-cuda]==2.16.2 instead of tensorflow.
+# After installing these, also install NNhealpix and the masked pooling patch (see README):
+#   pip install --no-build-isolation "git+https://github.com/ai4cmb/NNhealpix.git@24b99db0c223e325e33a4edb1e6f282e60f6d9fe"
+#   python 00_install_nnhealpix_patch.py
+tensorflow==2.16.2
+keras==3.11.3
+tf_keras==2.16.0  # legacy Keras, used by the toy problem NRE (06b)
+numpy==1.26.4
+scipy==1.15.3
+healpy==1.18.1
+astropy==7.0.1
+pandas==2.2.3
+matplotlib==3.10.3
+SciencePlots==2.2.2
+anesthetic==2.9.3
+ultranest==4.4.0
+scikit-learn==1.6.1
+optuna==5.0.0
+plotly==7.1.0
+kaleido==1.4.0
+networkx==3.4.2
+lsbi==0.12.3
+tqdm==4.70.1
+flit_core<4  # needed to build NNhealpix
+flit<4       # needed to build NNhealpix
