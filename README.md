@@ -1,7 +1,7 @@
 # dipole-tensionnet
 
 Companion code for `Simulation-based tension quantification of the cosmic
-dipole` ([arXiv:2607.25703](https://arxiv.org/abs/2607.25703)). The repository
+dipole` ([Land-Strykowski et al. 2026, MNRAS, 551, stag1455](https://doi.org/10.1093/mnras/stag1455)). The repository
 contains the code to run the analysis and make Figures 2–9 of the paper.
 Figure 1 (the schematic of the NRE) was drawn in TikZ and is not made here.
 
